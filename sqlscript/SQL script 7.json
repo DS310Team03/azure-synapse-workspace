@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 7",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'workspace_covid193imruebamuu7q_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [workspace_covid193imruebamuu7q_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://workspace@covid193imruebamuu7q.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE dbo.policies (\n\t[ID] int,\n\t[SchoolClosing] int,\n\t[SchoolClosingFlag] int,\n\t[WorkplaceClosing] int,\n\t[WorkplaceClosingFlag] int,\n\t[CancelPublicEvents] int,\n\t[CancelPublicEventsFlag] int,\n\t[RestrictionsOnGatherings] int,\n\t[RestrictionsOnGatheringsFlag] int,\n\t[ClosePublicTransport] int,\n\t[ClosePublicTransportFlag] int,\n\t[StayAtHomeRequirements] int,\n\t[StayAtHomeRequirementsFlag] int,\n\t[RestrictionsOnInternalMovement] int,\n\t[RestrictionsOnInternalMovementFlag] int,\n\t[InternationalTravelControls] int,\n\t[IncomeSupport] int,\n\t[DebtContractRelief] int,\n\t[FiscalMeasures] int,\n\t[InternationalSupport] int,\n\t[PublicInformationCampaigns] int,\n\t[PublicInformationCampaignsFlag] int,\n\t[TestingPolicy] int,\n\t[ContactTracing] int,\n\t[EmergencyInvestmentInHealthcare] int,\n\t[InvestmentInVaccines] int,\n\t[FacialCoverings] int,\n\t[FacialCoveringsFlag] int,\n\t[VaccinationPolicy] int,\n\t[VaccinationPolicyFlag] int,\n\t[ProtectionOfElderlyPeople] int,\n\t[ProtectionOfElderlyPeopleFlag] int,\n\t[StringencyIndex] int,\n\t[StringencyIndexForDisplay] int,\n\t[StringencyLegacyIndex] int,\n\t[StringencyLegacyIndexForDisplay] int,\n\t[GovernmentResponseIndex] int,\n\t[GovernmentResponseIndexForDisplay] int,\n\t[ContainmentHealthIndex] int,\n\t[ContainmentHealthIndexForDisplay] int,\n\t[EconomicSupportIndex] int,\n\t[EconomicSupportIndexForDisplay] int\n\t)\n\tWITH (\n\tLOCATION = 'policies.parquet',\n\tDATA_SOURCE = [workspace_covid193imruebamuu7q_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM dbo.policies\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "Covid19",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
